@@ -75,7 +75,7 @@ export function HeroSection({ locale, dict }: { locale: Locale; dict: SiteDictio
           </div>
 
           <div className="relative lg:justify-self-end">
-            <HeroVisualMockup />
+            <HeroVisualMockup dict={dict} />
           </div>
         </div>
       </div>

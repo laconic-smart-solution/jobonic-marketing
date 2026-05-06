@@ -29,9 +29,9 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: SiteDiction
     {
       title: dict.footer.forBusiness,
       links: [
-        { label: "B2B Contracts", href: withLocale(locale, "/business") },
-        { label: "Book a Demo", href: appBase },
-        { label: "Enterprise Escrow", href: appBase },
+        { label: dict.footer.b2bContracts, href: withLocale(locale, "/business") },
+        { label: dict.footer.bookDemo, href: appBase },
+        { label: dict.footer.enterpriseEscrow, href: appBase },
       ],
     },
     {
@@ -48,7 +48,7 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: SiteDiction
     <footer className="border-t border-border bg-foreground text-primary-foreground">
       <div className="container grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-5 lg:gap-10 lg:py-16">
         <div className="lg:col-span-1">
-          <p className="font-display text-lg font-semibold text-primary-foreground">Jobonic</p>
+          <p className="font-display text-lg font-semibold text-primary-foreground">{dict.brand}</p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/65">{dict.footer.blurb}</p>
         </div>
 
@@ -85,7 +85,9 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: SiteDiction
       </div>
       <div className="border-t border-primary-foreground/10">
         <div className="container py-6">
-          <p className="text-center text-xs text-primary-foreground/45">© {new Date().getFullYear()} Jobonic</p>
+          <p className="text-center text-xs text-primary-foreground/45">
+            © {new Date().getFullYear()} {dict.brand}. {dict.footer.copyright}
+          </p>
         </div>
       </div>
     </footer>

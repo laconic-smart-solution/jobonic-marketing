@@ -41,7 +41,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
           href={withLocale(locale, "/")}
           className="font-display text-lg font-semibold tracking-tight text-foreground"
         >
-          Jobonic
+          {dict.brand}
         </Link>
 
         <nav className="hidden items-center gap-0.5 lg:flex">

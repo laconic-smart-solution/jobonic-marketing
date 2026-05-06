@@ -9,13 +9,9 @@ export function CorridorMap() {
       </defs>
       <rect x="0" y="0" width="680" height="380" rx="24" fill="#f8fafc" />
       <circle cx="220" cy="180" r="18" fill="#7c3aed" />
-      <text x="220" y="212" textAnchor="middle" fill="#475569" fontSize="12" fontWeight="700">Thailand</text>
       <circle cx="95" cy="180" r="14" fill="#14b8a6" />
-      <text x="95" y="210" textAnchor="middle" fill="#475569" fontSize="12" fontWeight="700">Africa</text>
       <circle cx="360" cy="115" r="14" fill="#f59e0b" />
-      <text x="360" y="145" textAnchor="middle" fill="#475569" fontSize="12" fontWeight="700">China</text>
       <circle cx="490" cy="95" r="14" fill="#64748b" />
-      <text x="490" y="125" textAnchor="middle" fill="#475569" fontSize="12" fontWeight="700">Germany</text>
       <path d="M220 180 C165 180, 145 180, 95 180" stroke="url(#corridor-gradient)" strokeWidth="4" fill="none" strokeLinecap="round" />
       <path d="M220 180 C280 140, 320 130, 360 115" stroke="url(#corridor-gradient)" strokeWidth="4" fill="none" strokeLinecap="round" />
       <path d="M220 180 C320 160, 400 125, 490 95" stroke="url(#corridor-gradient)" strokeWidth="4" fill="none" strokeLinecap="round" />

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -6,6 +7,18 @@ import { getDictionary, isLocale, locales, type Locale } from "@/lib/i18n";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
+}
+
+export function generateMetadata({ params }: { params: { locale: string } }): Metadata {
+  if (!isLocale(params.locale)) {
+    return {};
+  }
+
+  const dict = getDictionary(params.locale);
+  return {
+    title: dict.metadata.siteTitle,
+    description: dict.metadata.siteDescription,
+  };
 }
 
 export default function LocaleLayout({

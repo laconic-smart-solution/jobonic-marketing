@@ -4,16 +4,8 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { Button } from "@/components/ui/button";
 import type { Locale, SiteDictionary } from "@/lib/i18n";
 
-const categories = [
-  "Market research contracts",
-  "Trade agent retainers",
-  "Logistics coordination",
-  "Business development",
-  "Supplier audit",
-  "ASEAN market entry coordination",
-] as const;
-
 export function BusinessBannerSection({ locale, dict }: { locale: Locale; dict: SiteDictionary }) {
+  const categories = dict.sections.businessCategories;
   return (
     <section className="py-section sm:py-section-lg">
       <div className="container">

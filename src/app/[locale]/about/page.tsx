@@ -10,7 +10,7 @@ export default function AboutPage({ params }: { params: { locale: string } }) {
     <section className="py-16 sm:py-20">
       <div className="container space-y-8">
         <SectionHeading title={dict.pages.aboutTitle} description={dict.pages.aboutDescription} />
-        <p className="max-w-3xl text-base leading-relaxed text-slate-600">Jobonic combines matching, escrow-backed milestones, and corridor-focused operations to support trusted international execution.</p>
+        <p className="max-w-3xl text-base leading-relaxed text-slate-600">{dict.pages.aboutBody}</p>
       </div>
     </section>
   );

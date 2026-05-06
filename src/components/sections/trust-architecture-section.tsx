@@ -1,12 +1,12 @@
 import { BadgeCheck, Gavel, Lock } from "lucide-react";
 
 import { SectionHeading } from "@/components/shared/section-heading";
-import { trustFeatures } from "@/data/site-data";
 import type { SiteDictionary } from "@/lib/i18n";
 
 const icons = [Lock, Gavel, BadgeCheck] as const;
 
 export function TrustArchitectureSection({ dict }: { dict: SiteDictionary }) {
+  const trustFeatures = dict.sections.trustFeatures;
   return (
     <section className="border-y border-border bg-muted/40 py-section sm:py-section-lg">
       <div className="container space-y-12 sm:space-y-14">
