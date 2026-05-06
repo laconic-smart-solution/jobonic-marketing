@@ -1,4 +1,4 @@
-import { CorridorMap } from "@/components/shared/corridor-map";
+import { HeroVisualMockup } from "@/components/shared/hero-visual-mockup";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { platformLocaleBaseUrl } from "@/data/site-data";
@@ -75,13 +75,7 @@ export function HeroSection({ locale, dict }: { locale: Locale; dict: SiteDictio
           </div>
 
           <div className="relative lg:justify-self-end">
-            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-primary/10 via-transparent to-transparent blur-2xl lg:-inset-6" aria-hidden />
-            <div className="relative rounded-2xl border border-border bg-card p-3 shadow-lg shadow-foreground/5 ring-1 ring-foreground/[0.04] sm:p-4">
-              <div className="aspect-[16/10] overflow-hidden rounded-xl border border-border/80 bg-muted/30">
-                <CorridorMap />
-              </div>
-              <p className="mt-3 px-1 text-center text-xs text-muted-foreground">{dict.hero.mapCaption}</p>
-            </div>
+            <HeroVisualMockup />
           </div>
         </div>
       </div>
