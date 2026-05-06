@@ -45,29 +45,48 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: SiteDiction
   ] as const;
 
   return (
-    <footer className="border-t border-slate-200 bg-white">
-      <div className="container grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-5">
-        <div>
-          <p className="text-lg font-bold text-primary">Jobonic</p>
-          <p className="mt-3 text-sm text-slate-600">{dict.footer.blurb}</p>
+    <footer className="border-t border-border bg-foreground text-primary-foreground">
+      <div className="container grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-5 lg:gap-10 lg:py-16">
+        <div className="lg:col-span-1">
+          <p className="font-display text-lg font-semibold text-primary-foreground">Jobonic</p>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/65">{dict.footer.blurb}</p>
         </div>
 
         {columns.map((column) => (
           <div key={column.title}>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-900">{column.title}</h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-600">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-primary-foreground/50">
+              {column.title}
+            </h3>
+            <ul className="mt-5 space-y-3 text-sm">
               {column.links.map((link) => (
                 <li key={`${column.title}-${link.label}`}>
                   {link.href.startsWith("http") ? (
-                    <a href={link.href} target="_blank" rel="noreferrer" className="hover:text-primary">{link.label}</a>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-primary-foreground/75 transition hover:text-primary-foreground"
+                    >
+                      {link.label}
+                    </a>
                   ) : (
-                    <Link href={link.href} className="hover:text-primary">{link.label}</Link>
+                    <Link
+                      href={link.href}
+                      className="text-primary-foreground/75 transition hover:text-primary-foreground"
+                    >
+                      {link.label}
+                    </Link>
                   )}
                 </li>
               ))}
             </ul>
           </div>
         ))}
+      </div>
+      <div className="border-t border-primary-foreground/10">
+        <div className="container py-6">
+          <p className="text-center text-xs text-primary-foreground/45">© {new Date().getFullYear()} Jobonic</p>
+        </div>
       </div>
     </footer>
   );

@@ -15,16 +15,29 @@ const categories = [
 
 export function BusinessBannerSection({ locale, dict }: { locale: Locale; dict: SiteDictionary }) {
   return (
-    <section className="py-16 sm:py-20">
+    <section className="py-section sm:py-section-lg">
       <div className="container">
-        <div className="rounded-3xl border border-violet-200 bg-violet-50 p-8 shadow-md shadow-violet-100 sm:p-10">
-          <SectionHeading title={dict.sections.businessTitle} description={dict.sections.businessDescription} />
-          <div className="mt-5 flex flex-wrap gap-2">
-            {categories.map((category) => (
-              <span key={category} className="rounded-full border border-violet-200 bg-white px-3 py-1 text-xs text-slate-700">{category}</span>
-            ))}
+        <div className="relative overflow-hidden rounded-3xl border border-primary/15 bg-gradient-to-br from-primary/[0.07] via-card to-card px-8 py-12 shadow-sm sm:px-12 sm:py-14">
+          <div
+            className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
+            aria-hidden
+          />
+          <div className="relative max-w-3xl">
+            <SectionHeading title={dict.sections.businessTitle} description={dict.sections.businessDescription} />
+            <div className="mt-8 flex flex-wrap gap-2">
+              {categories.map((category) => (
+                <span
+                  key={category}
+                  className="rounded-lg border border-border/80 bg-background/80 px-3 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur-sm"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+            <Button asChild size="lg" className="mt-10 h-12 rounded-xl px-8 text-base shadow-sm">
+              <Link href={`/${locale}/business`}>{dict.sections.businessCta}</Link>
+            </Button>
           </div>
-          <Button asChild size="lg" className="mt-8 rounded-full"><Link href={`/${locale}/business`}>{dict.sections.businessCta}</Link></Button>
         </div>
       </div>
     </section>

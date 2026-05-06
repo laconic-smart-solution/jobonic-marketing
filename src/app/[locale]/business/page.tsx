@@ -24,7 +24,7 @@ export default function BusinessPage({ params }: { params: { locale: string } })
               </Card>
             ))}
           </div>
-          <Button asChild size="lg" className="rounded-full"><a href={PLATFORM_URL} target="_blank" rel="noreferrer">{dict.pages.bookDemo}</a></Button>
+          <Button asChild size="lg"><a href={PLATFORM_URL} target="_blank" rel="noreferrer">{dict.pages.bookDemo}</a></Button>
         </div>
       </section>
     </>

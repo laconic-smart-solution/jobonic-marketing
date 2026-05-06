@@ -17,6 +17,19 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "system-ui", "sans-serif"],
+      },
+      fontSize: {
+        "display-sm": ["2.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        display: ["3.25rem", { lineHeight: "1.06", letterSpacing: "-0.03em" }],
+        "display-lg": ["3.75rem", { lineHeight: "1.04", letterSpacing: "-0.035em" }],
+      },
+      spacing: {
+        section: "5rem",
+        "section-lg": "6.5rem",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

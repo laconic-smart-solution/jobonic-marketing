@@ -44,16 +44,36 @@ export type SiteDictionary = {
     primaryCta: string;
     secondaryCta: string;
     chips: string[];
+    mapCaption: string;
+    socialProof: string;
+    stats: { value: string; label: string }[];
   };
   sections: {
+    corridorsEyebrow: string;
     corridorsTitle: string;
     corridorsSubtitle: string;
+    trustEyebrow: string;
     trustTitle: string;
+    trustSubtitle: string;
+    benefitsEyebrow: string;
+    benefitsTitle: string;
+    benefitsSubtitle: string;
+    benefits: { title: string; description: string }[];
+    howEyebrow: string;
+    howTitle: string;
+    howSubtitle: string;
+    howSteps: { title: string; description: string }[];
     businessTitle: string;
     businessDescription: string;
     businessCta: string;
+    partnersEyebrow: string;
     partnersTitle: string;
+    partnersSubtitle: string;
+    testimonialQuote: string;
+    testimonialAuthor: string;
+    testimonialRole: string;
     bottomTitle: string;
+    bottomSubtitle: string;
     bottomCtas: string[];
   };
   pages: {
@@ -94,24 +114,84 @@ const en: SiteDictionary = {
   },
   hero: {
     eyebrow: "Thailand's global service marketplace",
-    title: "Connect Thailand to Africa, China, Germany with payment guaranteed",
+    title: "Cross-border work with payments you can trust",
     subtitle:
-      "Link Thailand-based professionals and SMEs to Africa (EN/FR), China (CN), and Germany (DE) through secure milestone contracts where Jobonic holds payment until work is done.",
-    primaryCta: "Find Corridor Talent",
-    secondaryCta: "Post a Service",
+      "Hire verified talent or find corridor-aligned projects across Africa, China, and Germany—milestones, escrow, and neutral dispute support built in.",
+    primaryCta: "Hire talent",
+    secondaryCta: "Find work",
     chips: ["Africa EN/FR", "China CN", "Germany DE", "Thailand TH"],
+    mapCaption: "Corridor coverage: Africa · China · Germany",
+    socialProof: "Used by teams hiring and delivering across corridors",
+    stats: [
+      { value: "3", label: "Active corridors" },
+      { value: "100%", label: "Milestone-gated payouts" },
+      { value: "24/7", label: "Platform access" },
+    ],
   },
   sections: {
-    corridorsTitle: "Three corridors. One platform.",
-    corridorsSubtitle: "A corridor activation marketplace connecting Thailand to Africa, China, and Germany.",
-    trustTitle: "Pay on delivery. Verified by Jobonic.",
-    businessTitle: "Not just freelancers - companies too.",
+    corridorsEyebrow: "Corridors",
+    corridorsTitle: "Corridors built for how you actually work",
+    corridorsSubtitle:
+      "Dedicated playbooks for Africa, China, and Germany—so language, compliance, and delivery expectations match each market.",
+    trustEyebrow: "Platform",
+    trustTitle: "Everything you need to ship with confidence",
+    trustSubtitle: "Escrow, milestones, and fair resolution—without losing momentum on cross-border deals.",
+    benefitsEyebrow: "Benefits",
+    benefitsTitle: "Why teams choose Jobonic",
+    benefitsSubtitle: "Less back-and-forth, fewer payment surprises, and a clearer path from brief to done.",
+    benefits: [
+      {
+        title: "Escrow-backed milestones",
+        description: "Funds stay protected until deliverables are accepted—clients reduce risk, pros get predictable cash flow.",
+      },
+      {
+        title: "Corridor-native matching",
+        description: "Filters and workflows tuned for EN/FR, CN, and DE markets—not generic job board noise.",
+      },
+      {
+        title: "Neutral arbitration",
+        description: "If something goes wrong, Jobonic reviews milestone evidence and helps reach a fair outcome.",
+      },
+      {
+        title: "B2B-ready contracts",
+        description: "Engage agencies, operators, and SMEs with terms that scale beyond one-off gigs.",
+      },
+    ],
+    howEyebrow: "Process",
+    howTitle: "How it works",
+    howSubtitle: "From first brief to final payout—in four straightforward steps.",
+    howSteps: [
+      {
+        title: "Post or discover",
+        description: "Publish a scoped need or browse corridor talent with clear skills and regions.",
+      },
+      {
+        title: "Agree milestones",
+        description: "Split work into checkpoints everyone signs off on before money moves.",
+      },
+      {
+        title: "Work in escrow",
+        description: "Jobonic holds client funds securely while delivery progresses.",
+      },
+      {
+        title: "Release & review",
+        description: "Approve completion, release payment, and build your on-platform reputation.",
+      },
+    ],
+    businessTitle: "Built for companies, not just solo freelancers",
     businessDescription:
-      "Use B2B corridor contracts with escrow-backed milestones for agencies, consultancies, operators, and enterprise teams.",
-    businessCta: "Learn about Jobonic for Business",
-    partnersTitle: "Institutional corridor partners",
-    bottomTitle: "Ready to connect Thailand to the world?",
-    bottomCtas: ["Find Corridor Talent", "List a Service", "For Business"],
+      "Run retainers, SOWs, and multi-phase programs with the same milestone and escrow backbone your finance team expects.",
+    businessCta: "Explore Jobonic for Business",
+    partnersEyebrow: "Social proof",
+    partnersTitle: "Trusted by operators and institutions",
+    partnersSubtitle: "Corridor partners and programs aligned with how Jobonic routes work across regions.",
+    testimonialQuote:
+      "Milestone escrow gave our clients confidence to expand into two new corridors without changing how we invoice.",
+    testimonialAuthor: "Operations lead",
+    testimonialRole: "B2B services firm, Bangkok",
+    bottomTitle: "Start hiring—or find your next corridor project",
+    bottomSubtitle: "Create a free account and launch your first milestone-backed engagement in minutes.",
+    bottomCtas: ["Hire talent", "Find work", "For Business"],
   },
   pages: {
     aboutTitle: "Corridor activation for global service trade",

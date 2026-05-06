@@ -22,7 +22,7 @@ export default function CorridorPage({ params }: { params: { locale: string } })
               <Card key={service} className="rounded-2xl border-slate-200"><CardContent className="pt-6 text-sm text-slate-700">{service}</CardContent></Card>
             ))}
           </div>
-          <a href={PLATFORM_URL} target="_blank" rel="noreferrer" className="inline-flex rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white hover:bg-primary/90">Post a China Service Need</a>
+          <a href={PLATFORM_URL} target="_blank" rel="noreferrer" className="inline-flex rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90">Post a China Service Need</a>
         </div>
       </section>
     </>

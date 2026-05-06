@@ -35,21 +35,24 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
   const appBase = platformLocaleBaseUrl(locale);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur">
-      <div className="container flex h-20 items-center justify-between gap-4">
-        <Link href={withLocale(locale, "/")} className="text-xl font-bold tracking-tight text-primary">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="container flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
+        <Link
+          href={withLocale(locale, "/")}
+          className="font-display text-lg font-semibold tracking-tight text-foreground"
+        >
           Jobonic
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-0.5 lg:flex">
           {[
             { label: dict.nav.findWork, items: getFilterItems(appBase, "find-work", dict) },
             { label: dict.nav.findTalent, items: getFilterItems(appBase, "find-talent", dict) },
           ].map((menu) => (
             <DropdownMenu key={menu.label}>
-              <DropdownMenuTrigger className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100">
+              <DropdownMenuTrigger className="inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground">
                 {menu.label}
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-4 w-4 opacity-60" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-48">
                 <DropdownMenuLabel>{menu.label}</DropdownMenuLabel>
@@ -65,10 +68,20 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
             </DropdownMenu>
           ))}
 
-          <Link className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100" href={withLocale(locale, "/")}>{dict.nav.corridors}</Link>
-          <Link className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100" href={withLocale(locale, "/business")}>{dict.nav.forBusiness}</Link>
+          <Link
+            className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            href={withLocale(locale, "/")}
+          >
+            {dict.nav.corridors}
+          </Link>
+          <Link
+            className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
+            href={withLocale(locale, "/business")}
+          >
+            {dict.nav.forBusiness}
+          </Link>
           <a
-            className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+            className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
             href={`${appBase}/pricing`}
             target="_blank"
             rel="noreferrer"
@@ -76,7 +89,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
             {dict.nav.pricing}
           </a>
           <a
-            className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+            className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
             href={`${appBase}/about`}
             target="_blank"
             rel="noreferrer"
@@ -87,10 +100,10 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
 
         <div className="flex items-center gap-2">
           <DropdownMenu>
-            <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
+            <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground">
               <Globe2 className="h-4 w-4" />
               {localeLabels[locale]}
-              <ChevronDown className="h-4 w-4" />
+              <ChevronDown className="h-4 w-4 opacity-60" />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-24">
               {locales.map((lang) => (
@@ -101,8 +114,10 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button asChild className="rounded-full px-5">
-            <a href={PLATFORM_URL} target="_blank" rel="noreferrer">{dict.nav.getStarted}</a>
+          <Button asChild className="hidden h-10 rounded-xl px-5 sm:inline-flex">
+            <a href={PLATFORM_URL} target="_blank" rel="noreferrer">
+              {dict.nav.getStarted}
+            </a>
           </Button>
         </div>
       </div>

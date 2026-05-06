@@ -27,7 +27,7 @@ export default function PricingPage({ params }: { params: { locale: string } }) 
             </Card>
           ))}
         </div>
-        <div className="text-center"><Button asChild className="rounded-full" size="lg"><a href={PLATFORM_URL} target="_blank" rel="noreferrer">{dict.nav.getStarted}</a></Button></div>
+        <div className="text-center"><Button asChild size="lg"><a href={PLATFORM_URL} target="_blank" rel="noreferrer">{dict.nav.getStarted}</a></Button></div>
       </div>
     </section>
   );
