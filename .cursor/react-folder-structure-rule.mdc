@@ -1,0 +1,250 @@
+---
+alwaysApply: true
+---
+Got you — one clean, copy-paste-ready Markdown file, no splits, no weird breaks:
+```markdown
+# 🧱 App Folder Structure Rule (Turbo Repo)
+
+## 🎯 Purpose
+Define a consistent, scalable structure for all apps under `apps/*` in the monorepo.
+
+Each app should follow a **feature-first + layered data architecture**, keeping boundaries clear and maintainable.
+
+---
+
+## 📦 Root Structure (`apps/<module>/src`)
+
+```
+src/
+├── index.ts
+├── routes.tsx
+├── layouts/
+├── pages/
+├── features/
+├── shared/
+├── components/
+├── lib/
+├── types/
+├── mock/ (optional)
+├── dev-main.tsx (optional)
+```
+
+---
+
+## 🟢 Public Surface
+
+### `src/index.ts`
+- Keep **very small**
+- Only export:
+  - Routes (e.g. `propertyManagementRoutes`)
+  - Public types used outside the app
+
+### `src/routes.tsx`
+- Contains the **React Router RouteObject**
+- Single file until scaling requires splitting
+
+---
+
+## 🧩 Layout Layer
+
+### `src/layouts/`
+- Module-scoped layouts only
+- Examples:
+  - QueryClient provider
+  - Toast system
+  - Layout wrappers for routes
+
+🚫 Do NOT include global app shell here
+
+---
+
+## 🖥️ Pages vs Features
+
+### `src/pages/`
+- One component per route (URL-level)
+- Keep **thin**
+- Compose:
+  - `features/*`
+  - `components/*`
+
+👉 Pages = orchestration layer, not logic-heavy
+
+---
+
+### `src/features/{domain}/`
+
+Organized by **business domain (vertical slicing)**
+
+#### Example
+
+```
+features/
+└── projects/
+├── components/
+├── schemas/
+├── hooks/
+├── lib/
+├── projects.types.ts
+├── projects.utils.ts
+└── projects.constants.ts
+```
+
+#### Rules
+- Anything used **only in one domain** stays here
+- Allowed at root of feature:
+  - `*.types.ts`
+  - `*.utils.ts`
+  - `*.constants.ts`
+  - small mappers
+
+#### Subfolders
+- `components/` → UI specific to the feature
+- `schemas/` → Zod / React Hook Form schemas
+- `hooks/` → feature-specific hooks
+- `lib/` → helpers scoped to the feature
+
+---
+
+## 🔁 Shared Layer (Cross-cutting)
+
+```
+shared/
+├── api/
+├── services/
+├── queries/
+├── types/
+├── providers/
+├── lib/
+```
+
+### Responsibilities
+
+#### `shared/api/`
+- HTTP client (Axios, fetch wrapper)
+- Auth/token handling
+- Error normalization
+
+#### `shared/services/`
+- One file per API resource
+- Pure functions (NO React)
+
+#### `shared/queries/`
+- TanStack Query hooks
+- Centralized query keys
+
+#### `shared/types/`
+- API DTOs
+- Request/response contracts
+
+#### `shared/providers/`
+- Providers scoped to module
+- Example:
+  - QueryClientProvider
+
+#### `shared/lib/`
+- Non-React helpers
+- Example:
+  - pagination normalization
+
+---
+
+## 🔄 Dependency Direction (STRICT)
+
+```
+pages / features
+↓
+shared/queries
+↓
+shared/services
+↓
+shared/api
+```
+
+### Rules
+- Types flow from:
+  - `shared/types`
+  - OR feature-local types if scoped
+
+🚫 Never invert this dependency flow
+
+---
+
+## 🧱 Cross-Feature Utilities
+
+### `src/components/`
+- Reusable UI across features
+- Not yet worth moving to `packages/ui`
+
+#### Examples
+- Tables
+- Dialog shells
+- Filter bars
+
+---
+
+### `src/lib/`
+- Pure utilities (no React, no API)
+- No feature ownership
+
+#### Examples
+- `cn()`
+- URL parsing
+- Zod helpers
+
+---
+
+## 🌍 External Types & Mocks
+
+### `src/types/`
+- Types exported to other apps/packages
+- Re-export via `index.ts`
+
+### `src/mock/` (optional)
+- Local dev fixtures
+- Storybook-style data
+
+### `src/dev-main.tsx` (optional)
+- Standalone entry point (non-host mode)
+
+---
+
+## 🏷️ Naming Convention (Per App)
+
+Each app should use a **consistent prefix** for API-related files.
+
+### Example: `prty-` (property management)
+
+| Layer   | Pattern |
+|--------|--------|
+| API     | `{prefix}-client.ts` |
+| Service | `{prefix}-{resource}.service.ts` |
+| Query   | `{prefix}-{resource}.query.ts` |
+| Types   | `{prefix}-api.types.ts` |
+
+👉 Pick a prefix per app and stick to it
+
+---
+
+## 📦 What Goes to `@repo/*` Packages
+
+Move to shared packages ONLY if reused across apps:
+
+- `packages/ui` → design system components
+- `packages/hooks` → reusable hooks
+- `packages/utils` → generic utilities
+
+---
+
+## 🧠 Rule of Promotion
+
+| Usage Scope | Location |
+|------------|----------|
+| Single feature | `features/{domain}` |
+| Multiple features (same app) | `shared/` |
+| Multiple apps | `@repo/*` package |
+
+---
+
+## ⚡ One-line Rule
+
+> Thin `index.ts` + `routes.tsx`; pages as route shells; features for domain logic; shared for API layers (api → services → queries → types → providers); components + lib for cross-feature reuse.

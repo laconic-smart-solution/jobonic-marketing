@@ -1,0 +1,26 @@
+---
+description: General Java Spring Boot microservice standards
+globs: "property-management-backend/**/*.java"
+alwaysApply: true
+---
+
+# Java Microservice Rule
+
+- Keep each service bounded to one domain; avoid cross-domain business logic in the same module.
+- Follow module naming conventions used in this workspace (`prty`, `tnnt`, `book`, `docu`, etc.) for classes, DTOs, and APIs.
+- Keep API paths versioned and domain-scoped, e.g. `/api/{domain}/v1/...`.
+- Prefer shared platform patterns from `custom-backend` (base controllers/services, `ApiResponse`, pagination DTOs/support).
+- Implement `POST /pageable` for filtered lists with request DTO + specification-based query.
+- Keep gateway responsibilities in gateway modules only (routing, auth, CORS, circuit breaker); business services stay focused on domain logic.
+- Centralize mapping in mapper classes/components; avoid repetitive mapping code in controllers.
+- Use constructor injection only; avoid field injection.
+- Keep transactions explicit (`@Transactional` for write, `@Transactional(readOnly = true)` for queries).
+- Define service-local test profile and ensure startup tests pass with H2/isolated config.
+- Keep service configs minimal; avoid service-to-service tight coupling and duplicated constants.
+
+## Endpoint Checklist
+
+- Request DTO validated (`@Valid` / `@Validated`).
+- Response wrapped consistently (`ApiResponse<T>`).
+- Pagination metadata returned for paged endpoints.
+- Sorting fields validated against entity/DTO fields.

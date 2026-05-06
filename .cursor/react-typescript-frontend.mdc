@@ -1,0 +1,30 @@
+---
+description: General React + TypeScript frontend coding standards
+globs: "{Jobonic-web/src/**/*.{ts,tsx},property-management-frontend/**/*.{ts,tsx}}"
+alwaysApply: true
+---
+
+# React TypeScript Frontend Rule
+
+- Use feature-first structure: `features`, `shared`, `components`, `hooks`, `services`, `types`, `schemas`.
+- Keep API calls in service/client modules only; UI components should call hooks/query wrappers, not axios/fetch directly.
+- Use strongly typed API envelopes and DTOs (`ApiEnvelope`, page result/meta types); avoid `any`.
+- Prefer React Query for server state in app modules; keep query keys centralized and stable.
+- Validate forms with `zod` schemas and infer form value types from schemas.
+- Keep reusable UI in shared packages/components; keep domain-specific UI in app `features`.
+- Keep components focused and presentational; move orchestration/business rules into hooks.
+- Standardize pagination payloads for backend `/pageable` endpoints (`pageNumber`, `pageSize`, `sortBy`, `sortOrder`, `filter`).
+- Normalize API errors in one helper and surface user feedback via shared toast utilities.
+- Use path aliases consistently (`@/...`, `@repo/...`, app aliases) and avoid deep relative import chains.
+- Default to functional components and typed props; no untyped component exports.
+
+## Example Pattern
+
+```ts
+export const useCustomersPage = (body: CustomerPageRequest) =>
+  useQuery({
+    queryKey: customerKeys.page(JSON.stringify(body)),
+    queryFn: () => customerService.page(body),
+    placeholderData: keepPreviousData,
+  });
+```

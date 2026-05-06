@@ -1,0 +1,25 @@
+---
+description: React Turborepo standards for apps and shared packages
+globs: "property-management-frontend/**/*.{ts,tsx,js,json}"
+alwaysApply: true
+---
+
+# React Turborepo Rule
+
+- Keep workspace boundaries clear: deployable apps in `apps/*`, reusable code in `packages/*`.
+- Put cross-app primitives in packages (`ui`, `types`, `hooks`, `utils`, `auth-*`), not copied into apps.
+- Keep package public APIs explicit via `src/index.ts`; import from package entrypoints, not internal file paths.
+- Add or update `build`, `dev`, `typecheck`, and `clean` scripts per package/app so Turbo task graph remains valid.
+- Respect Turbo pipeline semantics: cache build/typecheck tasks; keep `dev` persistent and non-cached.
+- Avoid circular dependencies between packages; prefer one-way dependency flow from apps -> packages.
+- Share env/config through dedicated config packages and typed env helpers; avoid duplicated env parsing.
+- Keep TypeScript strictness aligned across apps/packages; centralize common tsconfig options where possible.
+- For micro-frontend style apps, keep route/module registration in host modules and domain logic inside each app.
+- Changes in shared packages must include quick smoke checks in at least one consuming app.
+
+## Turbo Checklist
+
+- New shared logic belongs in `packages/*`.
+- App-specific logic belongs in `apps/<app-name>/src`.
+- Exported package APIs are documented by `index.ts`.
+- `turbo run typecheck` succeeds after changes.

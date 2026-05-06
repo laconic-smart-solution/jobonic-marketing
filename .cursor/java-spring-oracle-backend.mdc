@@ -1,0 +1,36 @@
+---
+description: General Java backend standards for Spring Boot and Oracle
+globs: "**/*.java"
+alwaysApply: false
+---
+
+# Java Spring Boot + Oracle Backend Rule
+
+- Use layered structure: `api`/`controller` -> `service` -> `repo` -> `domain` + `dto` + `mapper`.
+- Keep controllers thin; move orchestration and business logic into service classes.
+- Return DTOs from APIs and services; do not expose JPA entities in controller responses.
+- Validate all inbound request bodies with Jakarta validation and `@Validated`/`@Valid`.
+- Use consistent response envelopes per service (for this workspace prefer `ApiResponse<T>` style where already adopted).
+- Use Spring Data JPA repositories and `Specification` for dynamic filtering; avoid inline SQL in controllers.
+- Keep Oracle-friendly schema mapping: explicit column names/lengths, enum strategy, and timestamps.
+- Prefer soft-delete conventions already used in the codebase (`is_enable` + SQL restriction) over hard delete.
+- Keep request pagination consistent: include `pageNumber`, `pageSize`, optional `sortBy`/`sortOrder`, and typed filter DTO.
+- For paginated endpoints, include page metadata in responses (e.g., `PageMeta`).
+- Keep configuration secure: no committed plaintext secrets; read sensitive values from env vars.
+- Add/update tests when changing behavior; use test profile with isolated datasource and discovery disabled.
+
+## Good Patterns
+
+```java
+@PostMapping("/pageable")
+public ApiResponse<List<MyDto>> page(@RequestBody @Valid MyPageRequest request) {
+    return service.page(request);
+}
+```
+
+```java
+@Transactional(readOnly = true)
+public ApiResponse<List<MyDto>> page(MyPageRequest request) {
+    return PageableSupport.query(repository, mapper, request.toPageAndFilter(), MyEntity.class, request.getFilter(), null);
+}
+```
