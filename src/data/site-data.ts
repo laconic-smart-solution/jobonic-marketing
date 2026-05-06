@@ -1,4 +1,34 @@
-export const PLATFORM_URL = "https://jobonic.io/en";
+import type { Locale } from "@/lib/i18n";
+
+/** Last-resort app entry when `NEXT_PUBLIC_PLATFORM_URL` and `NEXT_PUBLIC_DEV_PLATFORM_BASE` are unset. Override with `NEXT_PUBLIC_DEFAULT_PLATFORM_URL`. */
+const defaultPlatformEntry =
+  process.env.NEXT_PUBLIC_DEFAULT_PLATFORM_URL?.trim() || "https://jobonic.io/en";
+
+/** Canonical entry URL for the main Jobonic app (e.g. Get Started). Set `NEXT_PUBLIC_PLATFORM_URL`; falls back to `NEXT_PUBLIC_DEV_PLATFORM_BASE` then default entry. */
+export const PLATFORM_URL = (
+  process.env.NEXT_PUBLIC_PLATFORM_URL?.trim() ||
+  process.env.NEXT_PUBLIC_DEV_PLATFORM_BASE?.trim() ||
+  defaultPlatformEntry
+).replace(/\/$/, "");
+
+function localeBaseFromRootUrl(url: string, locale: Locale): string {
+  const normalized = url.replace(/\/$/, "");
+  const withoutLocale = normalized.replace(/\/[a-z]{2}$/i, "");
+  return `${withoutLocale}/${locale}`;
+}
+
+/** Base URL for the main Jobonic web app, matching the current marketing locale. */
+export function platformLocaleBaseUrl(locale: Locale): string {
+  const dev = process.env.NEXT_PUBLIC_DEV_PLATFORM_BASE?.trim();
+  if (dev) {
+    return localeBaseFromRootUrl(dev, locale);
+  }
+  const platform = process.env.NEXT_PUBLIC_PLATFORM_URL?.trim();
+  if (platform) {
+    return localeBaseFromRootUrl(platform, locale);
+  }
+  return localeBaseFromRootUrl(defaultPlatformEntry, locale);
+}
 
 export const languages = ["EN", "TH", "中文", "FR", "DE"] as const;
 

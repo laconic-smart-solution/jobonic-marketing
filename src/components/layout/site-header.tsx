@@ -13,17 +13,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { PLATFORM_URL } from "@/data/site-data";
+import { PLATFORM_URL, platformLocaleBaseUrl } from "@/data/site-data";
 import { localeLabels, locales, localizePath, type Locale, type SiteDictionary } from "@/lib/i18n";
 
 function withLocale(locale: Locale, path: string) {
   return `/${locale}${path}`;
 }
 
-const DEV_PLATFORM_BASE = process.env.NEXT_PUBLIC_DEV_PLATFORM_BASE;
-
-function getDevFilterItems(type: "find-work" | "find-talent", dict: SiteDictionary) {
-  const base = `${DEV_PLATFORM_BASE}/${type}`;
+function getFilterItems(appBase: string, type: "find-work" | "find-talent", dict: SiteDictionary) {
+  const base = `${appBase}/${type}`;
   return [
     { label: dict.nav.all, href: base },
     { label: dict.nav.africa, href: `${base}?country=africa` },
@@ -34,6 +32,7 @@ function getDevFilterItems(type: "find-work" | "find-talent", dict: SiteDictiona
 
 export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDictionary }) {
   const pathname = usePathname();
+  const appBase = platformLocaleBaseUrl(locale);
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/95 backdrop-blur">
@@ -44,8 +43,8 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
 
         <nav className="hidden items-center gap-1 lg:flex">
           {[
-            { label: dict.nav.findWork, items: getDevFilterItems("find-work", dict) },
-            { label: dict.nav.findTalent, items: getDevFilterItems("find-talent", dict) },
+            { label: dict.nav.findWork, items: getFilterItems(appBase, "find-work", dict) },
+            { label: dict.nav.findTalent, items: getFilterItems(appBase, "find-talent", dict) },
           ].map((menu) => (
             <DropdownMenu key={menu.label}>
               <DropdownMenuTrigger className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100">
@@ -70,7 +69,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
           <Link className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100" href={withLocale(locale, "/business")}>{dict.nav.forBusiness}</Link>
           <a
             className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
-            href={`${DEV_PLATFORM_BASE}/pricing`}
+            href={`${appBase}/pricing`}
             target="_blank"
             rel="noreferrer"
           >
@@ -78,7 +77,7 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
           </a>
           <a
             className="rounded-full px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
-            href={`${DEV_PLATFORM_BASE}/about`}
+            href={`${appBase}/about`}
             target="_blank"
             rel="noreferrer"
           >

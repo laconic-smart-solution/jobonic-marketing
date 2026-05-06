@@ -1,20 +1,20 @@
 import Link from "next/link";
 
+import { platformLocaleBaseUrl } from "@/data/site-data";
 import type { Locale, SiteDictionary } from "@/lib/i18n";
 
 function withLocale(locale: Locale, path: string) {
   return `/${locale}${path}`;
 }
 
-const DEV_PLATFORM_BASE = process.env.NEXT_PUBLIC_DEV_PLATFORM_BASE;
-
 export function SiteFooter({ locale, dict }: { locale: Locale; dict: SiteDictionary }) {
+  const appBase = platformLocaleBaseUrl(locale);
   const columns = [
     {
       title: dict.footer.jobonic,
       links: [
-        { label: dict.nav.about, href: `${DEV_PLATFORM_BASE}/find-talent` },
-        { label: dict.nav.pricing, href: `${DEV_PLATFORM_BASE}/pricing` },
+        { label: dict.nav.about, href: `${appBase}/find-talent` },
+        { label: dict.nav.pricing, href: `${appBase}/pricing` },
         { label: dict.nav.forBusiness, href: withLocale(locale, "/business") },
       ],
     },
@@ -30,16 +30,16 @@ export function SiteFooter({ locale, dict }: { locale: Locale; dict: SiteDiction
       title: dict.footer.forBusiness,
       links: [
         { label: "B2B Contracts", href: withLocale(locale, "/business") },
-        { label: "Book a Demo", href: "https://jobonic.io/en" },
-        { label: "Enterprise Escrow", href: "https://jobonic.io/en" },
+        { label: "Book a Demo", href: appBase },
+        { label: "Enterprise Escrow", href: appBase },
       ],
     },
     {
       title: dict.footer.legal,
       links: [
-        { label: dict.footer.privacy, href: "https://jobonic.io/en" },
-        { label: dict.footer.terms, href: "https://jobonic.io/en" },
-        { label: dict.footer.trust, href: "https://jobonic.io/en" },
+        { label: dict.footer.privacy, href: `${appBase}/privacy` },
+        { label: dict.footer.terms, href: `${appBase}/terms` },
+        { label: dict.footer.trust, href: `${appBase}/contact` },
       ],
     },
   ] as const;
