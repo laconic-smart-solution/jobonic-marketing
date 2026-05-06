@@ -9,6 +9,12 @@ const display = Plus_Jakarta_Sans({ subsets: ["latin"], display: "swap", variabl
 export const metadata: Metadata = {
   title: "Jobonic Corridors",
   description: "A corridor activation marketplace connecting Thailand to Africa, China, and Germany.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any", type: "image/x-icon" }
+    ],
+    shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

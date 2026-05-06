@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Globe2 } from "lucide-react";
@@ -39,9 +40,9 @@ export function SiteHeader({ locale, dict }: { locale: Locale; dict: SiteDiction
       <div className="container flex h-16 items-center justify-between gap-4 lg:h-[4.25rem]">
         <Link
           href={withLocale(locale, "/")}
-          className="font-display text-lg font-semibold tracking-tight text-foreground"
+          className="inline-flex items-center gap-2"
         >
-          {dict.brand}
+          <Image src="/brand/jobonic.svg" alt={dict.brand} width={110} height={26} className="h-6 w-auto" priority />
         </Link>
 
         <nav className="hidden items-center gap-0.5 lg:flex">
